@@ -208,3 +208,5 @@ __marimo__/
 
 # Django static collection output
 staticfiles/
+*.ini
+.vscode/
