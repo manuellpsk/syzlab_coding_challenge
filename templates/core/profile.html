@@ -9,6 +9,10 @@
             {% if is_own_profile %}
                 <span style="color: #666; font-size: 0.7em;">(You)</span>
             {% endif %}
+
+            {% if user.profile_image %}
+                <img src="{{ user.profile_image.url }}" alt="Profile Picture" class="profile-picture" style="max-width: 120px; border-radius: 50%; margin-right: 16px;">
+            {% endif %}
         </h1>
 
         <div class="grid-2">
@@ -30,6 +34,16 @@
                 <div class="field">
                     <strong class="field-label">Email:</strong>
                     <p class="field-value">{{ user.email|default:"Not provided" }}</p>
+                </div>
+
+                <div class="field">
+                    <strong class="field-label">Gender:</strong>
+                    <p class="field-value">{{ user.gender|default:"Not provided" }}</p>
+                </div>
+
+                <div class="field">
+                    <strong class="field-label">Description:</strong>
+                    <p class="field-value">{{ user.description|default:"Not provided" }}</p>
                 </div>
             </div>
 
@@ -59,5 +73,12 @@
         <div class="btn-row">
             <a href="{% url 'core:profiles' %}" class="btn btn-primary">Back to Profiles</a>
         </div>
+
+        <div class="btn-row">
+            <a href="{% url 'core:create_drawing' user.id %}" class="btn btn-secondary">Create Drawing</a>
+        </div>
     </div>
+{% endblock %}
+    
+{% block js%}
 {% endblock %}

@@ -1,7 +1,6 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404
-
-from core.models import User
+from django.shortcuts import render, get_object_or_404, redirect
+from core.models import DrawingPage, User
 
 
 def home(request):
@@ -35,3 +34,15 @@ def profiles(request):
     return render(request, 'core/profiles.html', {
         'users': users
     })
+
+
+@login_required
+def create_drawing(request, user_id: int):
+    """
+    View to create a new drawing - requires authentication.
+    Displays a form to upload a new drawing.
+    """
+    if request.method == 'POST':
+        DrawingPage.objects.create(user_id=user_id, title='New Drawing Page')
+
+    return redirect('core:profile', username=request.user.username)
